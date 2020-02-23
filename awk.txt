@@ -1,0 +1,52 @@
+more ls_usr_bin.txt - list of all binary files
+wc -l ls_usr_bin.txt
+
+awk '{print}' awk.txt
+awk '{print $0}' awk.txt    # all columns
+awk '{print $1}' awk.txt    # 1st column
+awk '{print $2}' awk.txt    # 2nd column
+awk '/aw/ {print $1}' awk.txt # 1st column that contains aw
+awk '/^a/ {print $1}' awk.txt # All 1st columns that starts with a
+awk '{print $1,$2}' awk.txt
+
+awk '/path/ {print $1,$2/1024 "K"}' ls_usr_bin.txt
+awk '/path/ && $2 > 15000 {print $1,$2/1024 "K"}' ls_usr_bin.txt
+
+# writing a script
+1.nano path15k.awk
+2.in the file, do below
+/path/ && $2 > 15000 {print $1,$2/1024 "K"}
+3. awk -f path15k.awk ls_usr_bin.txt
+
+# writing a script
+1.nano path15k.awk
+2.in the file, do below
+/path/ && $2 > 15000 {print $1,$2/1024 "K"}
+/^a/ && $2 > 25000 {print $1,$2/1024 "K"}
+3. awk -f path15k.awk ls_usr_bin.txt
+
+
+# writing a script
+1.nano path15k.awk
+2.in the file, do below
+/^w/ && $2 > 9000 {print $1,int($2/1024) "K"}
+3. awk -f path15k.awk ls_usr_bin.txt
+
+
+#Writing Functions
+
+func round(n){
+	
+	n = n + 0.5
+	n = int(n)
+	return n
+}
+
+# writing a script
+1.nano path15k.awk
+2.in the file, do below
+/^w/ && $2 > 9000 {print $1,round($2/1024)"K"}
+3. awk -f path15k.awk ls_usr_bin.txt
+
+
+
